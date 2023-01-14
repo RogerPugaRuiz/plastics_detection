@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- leaflet js imports -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <!-- Heatmap.js -->
+    <script type="text/javascript" src="{% static 'build/heatmap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/leaflet-heatmap/leaflet-heatmap.js' %}"></script>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <!-- jquery ui -->
+    <link rel="stylesheet" href="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.css' %}">
+    <script src="{% static 'js/jquery-ui-1.13.2/external/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
+
+
+    <title>PLASTICS DETECTION</title>
+
+</head>
+
+<body>
+    <!-- <header>
+        <h1> BIOST3</h1>
+    </header> -->
+    <div class="pop-up">
+        <div id="folders">
+            <div>
+
+            </div>
+        </div>
+        <div id="dark-efect">
+        </div>
+    </div>
+    <section id="mapContainer">
+        <div id="map" class="blur">
+
+        </div>
+        <!-- <aside>
+            <div id="asideTitle">
+                <p>Properties</p>
+            </div>
+            <div class="element">
+                <input type="file" name="outputFile" id="outputFile">
+                
+            </div>
+        </aside> -->
+        <div id="panel">
+            <img class="icon red" src="{% static 'img/dibujo.svg' %}" alt="" srcset="">
+            <img class="icon blue" src="{% static 'img/dibujo-1.svg' %}" alt="" srcset="">
+            <img class="icon green" src="{% static 'img/dibujo-2.svg' %}" alt="" srcset="">
+        </div>
+    </section>
+    <script src="{% static 'js/map.js' %}">
+
+    </script>
+    <script src="{% static 'js/loadFile.js' %}"></script>
+    <script>
+        $("#folders").draggable();
+    </script>
+</body>
+
+</html>
