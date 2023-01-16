@@ -18,5 +18,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('map-viewer', include("map_viewer.urls"))
+    path('', include("map_viewer.urls"))
 ]
