@@ -4,20 +4,25 @@
 
 function loadMap() {
     mapCSV = localStorage.getItem("map");
-    if (mapCSV == null){
+    latlng = localStorage.getItem("latlng");
+    zoom = localStorage.getItem("zoom");
+    zoom = JSON.parse(zoom);
+    latlng = JSON.parse(latlng);
+
+    if (mapCSV == null) {
         testData = {
             data: []
         };
-    } else{
+    } else {
         testData = JSON.parse(mapCSV);
     }
 
-    
+
     var baseLayer = L.tileLayer(
         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">BIOST3</a>',
         maxZoom: 18,
-        minZoom: 3
+        minZoom: 4
     }
     );
 
@@ -25,7 +30,7 @@ function loadMap() {
     var cfg = {
         // radius should be small ONLY if scaleRadius is true (or small radius is intended)
         "radius": 2,
-        "maxOpacity": .5,
+        "maxOpacity": 0.7,
         // scales the radius based on map zoom
         "scaleRadius": true,
         // if set to false the heatmap uses the global maximum for colorization
@@ -42,26 +47,31 @@ function loadMap() {
 
 
     heatmapLayer = new HeatmapOverlay(cfg);
-    
+
     var map = new L.Map('map', {
-        center: new L.LatLng(25.6586, -80.3568),
+        center: new L.LatLng(0, 0),
         zoom: 4,
         layers: [baseLayer, heatmapLayer],
 
     });
     L.control.scale({ maxWidth: 150 }).addTo(map);
-    map.on("mousemove", function(e){
-        console.log(e.latlng);
+    map.on("mousemove", function (e) {
         $("#lat").html(e.latlng.lat);
         $("#lng").html(e.latlng.lng);
     });
 
+
     // setInterval(() => {
     //     map.setView([0, 0], 0, { duration: 1, animate: true });
     //     setTimeout(() => {
-    //         map.setView([60, 0], 0, { duration: 1, animate: true });
+    //         map.setView([-40, 20], 14, { duration: 1, animate: true });
     //     }, 2000);
     // }, 4000);
+
+    savePosition(map, heatmapLayer);
+    setInterval(() => {
+        changeRadio(map, heatmapLayer);
+    });
 
 
     heatmapLayer.setData(testData);
@@ -69,42 +79,59 @@ function loadMap() {
     // make accessible for debugging
     layer = heatmapLayer;
 
-    setInterval(() => {
-        radiusZoomControl = [
-            {zoom:3, radius:2},
-            {zoom:4, radius:1},
-            {zoom:5, radius:0.5},
-            {zoom:6, radius:0.1},
-            {zoom:7, radius:0.1},
-            {zoom:8, radius:0.05},
-            {zoom:9, radius:0.05},
-            {zoom:10, radius:0.01},
-            {zoom:11, radius:0.01},
-            {zoom:12, radius:0.01},
-            {zoom:13, radius:0.005},
-            {zoom:14, radius:0.005},
-            {zoom:15, radius:0.001},
-            {zoom:16, radius:0.001},
-            {zoom:17, radius:0.001},
-            {zoom:18, radius:0.001},
-        
-        ]
 
-        for (let index = 0; index < radiusZoomControl.length; index++) {
-            const element = radiusZoomControl[index];
-            if (map.getZoom() == element.zoom) {
-                heatmapLayer.cfg.radius = element.radius;
-            }
-            
-        }
-        // if (map.getZoom() <= 4) {
-        //     heatmapLayer.cfg.radius = 2;
-        // } else if (map.getZoom() >= 5){
-        //     heatmapLayer.cfg.radius = 1;
-        // }
-    });
 }
 
+function changeRadio(map, heatmapLayer) {
+
+    radiusZoomControl = [
+        { zoom: 3, radius: 2 },
+        { zoom: 4, radius: 1 },
+        { zoom: 5, radius: 0.5 },
+        { zoom: 6, radius: 0.5 },
+        { zoom: 7, radius: 0.1 },
+        { zoom: 8, radius: 0.05 },
+        { zoom: 9, radius: 0.05 },
+        { zoom: 10, radius: 0.01 },
+        { zoom: 11, radius: 0.01 },
+        { zoom: 12, radius: 0.01 },
+        { zoom: 13, radius: 0.005 },
+        { zoom: 14, radius: 0.005 },
+        { zoom: 15, radius: 0.001 },
+        { zoom: 16, radius: 0.001 },
+        { zoom: 17, radius: 0.001 },
+        { zoom: 18, radius: 0.001 },
+
+    ]
+    for (let index = 0; index < radiusZoomControl.length; index++) {
+        const element = radiusZoomControl[index];
+        if (map.getZoom() == element.zoom) {
+            heatmapLayer.cfg.radius = element.radius;
+        }
+
+    }
+    // if (map.getZoom() <= 4) {
+    //     heatmapLayer.cfg.radius = 2;
+    // } else if (map.getZoom() >= 5){
+    //     heatmapLayer.cfg.radius = 1;
+    // }
+
+}
+function savePosition(map, heatmapLayer) {
+    if (latlng != null) {
+        map.setView([latlng.lat, latlng.lng], zoom, { duration: 0, animate: false });
+        // changeRadio(map, heatmapLayer)
+        changeRadio(map, heatmapLayer);
+    }
+
+    setInterval(() => {
+        latlng = map.getCenter();
+        zoom = map.getZoom();
+
+        localStorage.setItem("latlng", JSON.stringify(latlng));
+        localStorage.setItem("zoom", JSON.stringify(zoom));
+    });
+}
 window.onload = function () {
 
     loadMap();
