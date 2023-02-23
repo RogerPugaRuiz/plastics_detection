@@ -3,31 +3,24 @@
 <html lang="en">
 
 <head>
-    {% load static %}
+    <!-- {% load static %} -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- leaflet js imports -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 
-    <!-- Heatmap.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
     <script type="text/javascript" src="{% static 'build/heatmap.js' %}"></script>
     <script type="text/javascript" src="{% static 'plugins/leaflet-heatmap/leaflet-heatmap.js' %}"></script>
 
-    <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-    <!-- jquery ui -->
     <link rel="stylesheet" href="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.css' %}">
     <script src="{% static 'js/jquery-ui-1.13.2/external/jquery/jquery.js' %}"></script>
     <script src="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
-
 
     <title>PLASTICS DETECTION</title>
 
@@ -37,13 +30,46 @@
     <!-- <header>
         <h1> BIOST3</h1>
     </header> -->
+    <div id="load-app">
+        <div class="background" id="change-color">
+            <div class="university-information">
+                <h1>
+                    PLASTIC DETECTOR
+                </h1>
+                <p>
+                    Universitat de Barcelona (2023)-Grup de Recerca BIOST3. Section of Statistics. Departament of Genètics, Microbiology and Statistics.
+                </p>
+                <p>
+                    Desarrollador: Roger Puga Equipo investigador: Joaquin Justel, Odei Garin
+                </p>
+                <p>
+                    Dirección Técnica: Toni Monleón-Getino
+                </p>
+
+                <img id="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="logo BIOST3">
+
+                <img id="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="logo sección de estadistica">
+
+                <img id="logo-biost3" src="{% static 'img/logo_home_nou.png' %}" alt="logo Universitat de Barcelona">
+
+                <div id="loading">
+                    Loading
+                    <span id="loading-dots"></span>
+                </div>
+                <div id="press-any-key">
+                    <p>Presiona cualquier tecla</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="pop-up">
         <div id="folders" class="new-pop-up">
             <div class="blur">
                 <img id="close" src="{% static 'img/close.svg' %}" alt="">
                 <h2>FOLDERS</h2>
                 <div class="box">
-                    <div id="neural-network-files">
+                    <!-- <div id="neural-network-files">
                         <h3>Network neural files</h3>
                         <div id="input-box" class="file">
                             <input type="file" name="inputFolder" id="inputFolder" hidden webkitdirectory directory multiple>
@@ -53,13 +79,13 @@
                         <input type="checkbox" name="saveOnServer" id="saveOnServer">
                         <label for="saveOnServer">save images to server</label>
 
-                        <!-- <input type="file" name="image-files" id="image-files" multiple>
+                        <input type="file" name="image-files" id="image-files" multiple>
                         <label for="image-files">Insert images</label>
                         <input type="file" id="ctrl" webkitdirectory directory multiple/> -->
-                    </div>
+                    <!-- </div> -->
                     <div id="map-viewer-files">
                         <h3>Map viewer files</h3>
-                        <div id="csvFile-box"  class="file">
+                        <div id="csvFile-box" class="file">
                             <input type="file" name="csvFile" id="csvFile" hidden accept=".csv">
                             <label for="csvFile" id="csvFile-label">csv file</label>
                             <input type="text" name="csvFile-text" id="csvFile-text" disabled>
@@ -76,11 +102,11 @@
                     <img id="start-button" src="{% static 'img/start.svg' %}" alt="" srcset="">
                     <div>
                         <div id="image-collection">
-    
+
                         </div>
-        
+
                         <div id="load">
-    
+
                         </div>
                     </div>
                 </div>
@@ -110,8 +136,7 @@
             </div>
         </aside> -->
         <div id="position">
-            lat: <span id="lat"></span><br>
-            lng: <span id="lng"></span>
+            lat: <span id="lat"></span><br> lng: <span id="lng"></span>
         </div>
         <div id="panel">
             <img class="icon red" id="folders-button" src="{% static 'img/dibujo.svg' %}" alt="" srcset="">
@@ -125,6 +150,7 @@
     <script src="{% static 'js/map.js' %}"></script>
     <script src="{% static 'js/openAndCloseWindows.js' %}"></script>
     <script src="{% static 'js/folders.js' %}"></script>
+    <script src="{% static 'js/load_web.js' %}"></script>
 </body>
 
 </html>

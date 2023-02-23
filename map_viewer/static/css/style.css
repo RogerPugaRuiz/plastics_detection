@@ -1,228 +1,280 @@
-@font-face {
-    font-family: "MADE Tommy Soft Thin PERSONAL USE";
-    src: url("../fonts/MADE Tommy Soft Thin PERSONAL USE.otf") format("opentype");
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "MADE Tommy Soft Thin PERSONAL USE";
-}
-
-/* h1 {
+    @font-face {
+        font-family: "MADE Tommy Soft Thin PERSONAL USE";
+        src: url("../fonts/MADE Tommy Soft Thin PERSONAL USE.otf") format("opentype");
+    }
+    
+    @keyframes gradient {
+        0% {
+            background-position: 0% 0%;
+        }
+        50% {
+            background-position: 100% 100%;
+        }
+        100% {
+            background-position: 0% 0%;
+        }
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "MADE Tommy Soft Thin PERSONAL USE";
+    }
+    /* h1 {
     font-size: 18px;
     margin: 0;
     padding: 0;
     padding-top: 20px;
     padding-left: 30px;
 } */
-
-header {
-    height: 7vh;
-    min-height: 40px;
-    margin: 0;
-    padding: 0;
-    border-bottom: 2px solid gray;
-    background-color: white;
-    z-index: 10;
-}
-
-#mapContainer {
-    /* height: 92.6vh; */
-    height: 100vh;
-    width: 100%;
-
-    margin: 0;
-    padding: 0;
-}
-
-#mapContainer aside {
-    position: absolute;
-    right: 2.5%;
-    top: 14vh;
-    height: 70vh;
-    width: 15%;
-    background-color: rgb(255, 249, 244);
-    box-shadow: -5px -5px 10px rgba(128, 128, 128, 0.404);
-    z-index: 10;
-    padding: 0;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 0.4rem;
-}
-
-.leaflet-container {
-    z-index: 1;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    margin: auto;
-    padding: 0;
-    /* border: 5px dashed green; */
-    /* border-radius: 1rem;
+    
+    header {
+        height: 7vh;
+        min-height: 40px;
+        margin: 0;
+        padding: 0;
+        border-bottom: 2px solid gray;
+        background-color: white;
+        z-index: 10;
+    }
+    
+    #mapContainer {
+        /* height: 92.6vh; */
+        height: 100vh;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        /* display: none; */
+        z-index: 0;
+    }
+    
+    #mapContainer aside {
+        position: absolute;
+        right: 2.5%;
+        top: 14vh;
+        height: 70vh;
+        width: 15%;
+        background-color: rgb(255, 249, 244);
+        box-shadow: -5px -5px 10px rgba(128, 128, 128, 0.404);
+        z-index: 10;
+        padding: 0;
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 0.4rem;
+    }
+    
+    .leaflet-container {
+        z-index: 1;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+        margin: auto;
+        padding: 0;
+        /* border: 5px dashed green; */
+        /* border-radius: 1rem;
     box-shadow: 0px 0px 5px green; */
-
-}
-
-#outputFile {
-    width: 80%;
-    padding: 1rem;
-}
-
-
-#asideTitle {
-    background-color: rgb(148, 255, 144);
-    margin: 0;
-    padding: 1rem;
-    border-top-left-radius: 0.4rem;
-}
-
-#asideTitle p {
-    margin: 0;
-    padding: 0;
-    color: black;
-}
-
-#panel {
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    width: auto;
-    background-color: rgba(55, 71, 92, 0.637);
-    border-radius: 1rem;
-    z-index: 10;
-    border: 7px double white;
-    padding: 0.5rem;
-}
-
-#panel .icon {
-    z-index: 10;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.4rem;
-}
-
-#panel .red:hover {
-    background-color: rgb(255, 88, 88);
-}
-
-#panel .blue:hover {
-    background-color: rgb(123, 123, 255);
-}
-
-#panel .green:hover {
-    background-color: rgb(0, 168, 0);
-}
-
-#dark-efect {
-    background-color: rgba(0, 0, 0, 0);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-}
-
-.blur {
-    position: relative;
-    backdrop-filter: blur(10px);
-    /* display: none; */
-}
-
-.new-pop-up {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-
-}
-
-.new-pop-up .blur {
-    position: relative;
-    background-color: rgba(0, 70, 116, 0.397);
-    width: 800px;
-    height: 400px;
-    margin: auto;
-    z-index: 10;
-    box-shadow: 5px 5px 4px gray;
-    border-radius: 0.5rem;
-    /* border: 7px double white; */
-    cursor: grab;
-
-}
-
-.new-pop-up .blur h2 {
-    color: white;
-    text-align: center;
-    padding: 1.5rem;
-    margin: 0;
-}
-
-#close {
-    position: absolute;
-    right: 0px;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    margin: 1rem;
-}
-
-.new-pop-up .box {
-    display: flex;
-    width: 90%;
-    margin: auto;
-    /* padding-top: 3rem; */
-}
-
-.new-pop-up .box>div {
-    position: relative;
-    width: 100%;
-    border: 5px double white;
-    margin: 0.2rem;
-    color: white;
-    padding: 1rem;
-}
-
-.new-pop-up .box div h3{
-    padding: 1rem;
-}
-.file label{
-    background-color: rgb(0, 132, 255);
-    cursor: pointer;
-    padding: 1rem;
-    width: 30%;
-}
-.file input[type=text]{
-    margin: 0;
-    background-color: white;
-    border: none;
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    text-overflow: ellipsis;
-}
-
-.file{
-    display: flex;
-    margin: 1rem;
-}
-
-#position{
-    position: absolute;
-    right: 50px;
-    top: 25px;
-    z-index: 10;
-    color: black;
-    font-size: 20px;
-    background-color: white;
-    width: 250px;
-    padding: 0.5rem;
-}
-
-
-#start-button{
-    width: 40px;
-}
+    }
+    
+    #outputFile {
+        width: 80%;
+        padding: 1rem;
+    }
+    
+    #asideTitle {
+        background-color: rgb(148, 255, 144);
+        margin: 0;
+        padding: 1rem;
+        border-top-left-radius: 0.4rem;
+    }
+    
+    #asideTitle p {
+        margin: 0;
+        padding: 0;
+        color: black;
+    }
+    
+    #panel {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        width: auto;
+        background-color: rgba(55, 71, 92, 0.637);
+        border-radius: 1rem;
+        z-index: 10;
+        border: 7px double white;
+        padding: 0.5rem;
+    }
+    
+    #panel .icon {
+        z-index: 10;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 0.4rem;
+    }
+    
+    #panel .red:hover {
+        background-color: rgb(255, 88, 88);
+    }
+    
+    #panel .blue:hover {
+        background-color: rgb(123, 123, 255);
+    }
+    
+    #panel .green:hover {
+        background-color: rgb(0, 168, 0);
+    }
+    
+    #dark-efect {
+        background-color: rgba(0, 0, 0, 0);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+    
+    .blur {
+        position: relative;
+        backdrop-filter: blur(10px);
+        /* display: none; */
+    }
+    
+    .new-pop-up {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+    }
+    
+    .new-pop-up .blur {
+        position: relative;
+        background-color: rgba(0, 70, 116, 0.397);
+        width: 800px;
+        height: 400px;
+        margin: auto;
+        z-index: 10;
+        box-shadow: 5px 5px 4px gray;
+        border-radius: 0.5rem;
+        /* border: 7px double white; */
+        cursor: grab;
+    }
+    
+    .new-pop-up .blur h2 {
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+        margin: 0;
+    }
+    
+    #close {
+        position: absolute;
+        right: 0px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        margin: 1rem;
+    }
+    
+    .new-pop-up .box {
+        display: flex;
+        width: 90%;
+        margin: auto;
+        /* padding-top: 3rem; */
+    }
+    
+    .new-pop-up .box>div {
+        position: relative;
+        width: 100%;
+        border: 5px double white;
+        margin: 0.2rem;
+        color: white;
+        padding: 1rem;
+    }
+    
+    .new-pop-up .box div h3 {
+        padding: 1rem;
+    }
+    
+    .file label {
+        background-color: rgb(0, 132, 255);
+        cursor: pointer;
+        padding: 1rem;
+        width: 30%;
+    }
+    
+    .file input[type=text] {
+        margin: 0;
+        background-color: white;
+        border: none;
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        text-overflow: ellipsis;
+    }
+    
+    .file {
+        display: flex;
+        margin: 1rem;
+    }
+    
+    #position {
+        position: absolute;
+        right: 50px;
+        top: 25px;
+        z-index: 10;
+        color: black;
+        font-size: 20px;
+        background-color: white;
+        width: 250px;
+        padding: 0.5rem;
+    }
+    
+    #start-button {
+        width: 40px;
+    }
+    
+    #load-app .background {
+        position: absolute;
+        height: 200px;
+        background: rgb(113, 0, 139);
+        background: -moz-linear-gradient(90deg, rgba(113, 0, 139, 1) 0%, rgba(191, 92, 23, 1) 22%, rgba(214, 104, 0, 1) 39%, rgba(0, 126, 159, 1) 73%, rgba(98, 0, 144, 1) 100%);
+        background: -webkit-linear-gradient(90deg, rgba(113, 0, 139, 1) 0%, rgba(191, 92, 23, 1) 22%, rgba(214, 104, 0, 1) 39%, rgba(0, 126, 159, 1) 73%, rgba(98, 0, 144, 1) 100%);
+        background: linear-gradient(90deg, rgba(113, 0, 139, 1) 0%, rgba(191, 92, 23, 1) 22%, rgba(214, 104, 0, 1) 39%, rgba(0, 126, 159, 1) 73%, rgba(98, 0, 144, 1) 100%);
+        filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#71008b", endColorstr="#620090", GradientType=1);
+        background-size: 400% 100%;
+        /*Asignamos un ancho para el background del 300% y altura 100%*/
+        animation: gradient 30s ease infinite;
+        /*'gradient' es el nombre de la animación que crearemos, tarda en completarse 15s y vuelve a empezar infinitamente*/
+        color: white;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        /* animation: BackGroundGradient 2s ease-out 0s infinite; */
+    }
+    
+    #load-app .background .university-information {
+        position: relative;
+        margin: auto;
+        width: 600px;
+        padding: 1rem;
+        top: 100px;
+        background-color: rgba(58, 58, 58, 0.507);
+        border-radius: 5px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.493);
+    }
+    
+    #loading {
+        font-size: 20px;
+    }
+    
+    #loading-dots {
+        font-size: 50px;
+    }
+    
+    #press-any-key {
+        display: none;
+        font-size: 20px;
+    }
