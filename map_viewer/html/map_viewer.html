@@ -46,11 +46,11 @@
                     Dirección Técnica: Toni Monleón-Getino
                 </p>
 
-                <img id="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="logo BIOST3">
+                <img class="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="logo BIOST3">
 
-                <img id="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="logo sección de estadistica">
+                <img class="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="logo sección de estadistica">
 
-                <img id="logo-biost3" src="{% static 'img/logo_home_nou.png' %}" alt="logo Universitat de Barcelona">
+                <img class="logo-biost3" src="{% static 'img/logo_home_nou.png' %}" alt="logo Universitat de Barcelona">
 
                 <div id="loading">
                     Loading
@@ -63,6 +63,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="pop-up">
         <div id="folders" class="new-pop-up">
             <div class="blur">
@@ -84,7 +86,7 @@
                         <input type="file" id="ctrl" webkitdirectory directory multiple/> -->
                     <!-- </div> -->
                     <div id="map-viewer-files">
-                        <h3>Map viewer files</h3>
+                        <!-- <h3>Map viewer files</h3> -->
                         <div id="csvFile-box" class="file">
                             <input type="file" name="csvFile" id="csvFile" hidden accept=".csv">
                             <label for="csvFile" id="csvFile-label">csv file</label>
@@ -119,9 +121,40 @@
                 <h2>CONFIGURATION</h2>
             </div>
         </div>
+        <div id="info" class="new-pop-up">
+            <div class="blur">
+                <img id="close" src="{% static 'img/close.svg' %}" alt="">
+                <h2>PLASTIC DETECTOR</h2>
+                <div class="university-information">
+                    <p>
+                        Universitat de Barcelona (2023)-Grup de Recerca BIOST3. Section of Statistics. Departament of Genètics, Microbiology and Statistics.
+                    </p>
+                    <p>
+                        Desarrollador: Roger Puga Equipo investigador: Joaquin Justel, Odei Garin
+                    </p>
+                    <p>
+                        Dirección Técnica: Toni Monleón-Getino
+                    </p>
+
+                    <img class="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="logo BIOST3">
+
+                    <img class="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="logo sección de estadistica">
+
+                    <img class="logo-biost3" src="{% static 'img/logo_home_nou.png' %}" alt="logo Universitat de Barcelona">
+
+                    <p class="size-15">
+                        Datos de ejemplo <a href="http://biost3.bio.ub.edu/static/db/20220318_130430_plastic_output.csv">http://biost3.bio.ub.edu/static/db/20220318_130430_plastic_output.csv</a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
         <!-- <div id="dark-efect">
         </div> -->
     </div>
+    <aside>
+
+    </aside>
     <section id="mapContainer">
         <div id="map">
 
@@ -136,12 +169,17 @@
             </div>
         </aside> -->
         <div id="position">
-            lat: <span id="lat"></span><br> lng: <span id="lng"></span>
+            <div class="blur">
+                lat: <span id="lat"></span><br> lng: <span id="lng"></span>
+            </div>
         </div>
         <div id="panel">
-            <img class="icon red" id="folders-button" src="{% static 'img/dibujo.svg' %}" alt="" srcset="">
-            <img class="icon blue" id="neural-network-button" src="{% static 'img/dibujo-1.svg' %}" alt="" srcset="">
-            <img class="icon green" id="configuration-button" src="{% static 'img/dibujo-2.svg' %}" alt="" srcset="">
+            <div class="blur">
+                <img class="icon red" id="folders-button" src="{% static 'img/dibujo.svg' %}" alt="" srcset="">
+                <img class="icon blue" id="neural-network-button" src="{% static 'img/dibujo-1.svg' %}" alt="" srcset="">
+                <img class="icon green" id="configuration-button" src="{% static 'img/dibujo-2.svg' %}" alt="" srcset="">
+                <img class="icon dark" id="info-button" src="{% static 'img/info.svg' %}" alt="" srcset="">
+            </div>
         </div>
     </section>
 
