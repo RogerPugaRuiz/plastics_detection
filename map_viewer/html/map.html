@@ -1,0 +1,69 @@
+{% extends "base.html" %} 
+{% block title %}Map viewer{% endblock %}
+{% block content %}
+{% load static %}
+<!-- <div id="load-app">
+    <div class="background" id="change-color">
+        <div class="university-information">
+            <header>
+                <h1>PLASTIC DETECTOR</h1>
+                <p>
+                    <span>Universitat de Barcelona (2023) - Grup de Recerca BIOST3. Section of Statistics. Departament of Genètics, Microbiology and Statistics.</span>
+                </p>
+            </header>
+            <main>
+                <section>
+                    <div>
+                        <p>Desarrollador: Roger Puga</p>
+                        <p>Equipo investigador: Joaquin Justel, Odei Garin</p>
+                        <p>Dirección Técnica: Toni Monleón-Getino</p>
+                    </div>
+                    <div>
+                        <img class="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="Logo del Grupo de Investigación BIOST3">
+                        <img class="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="Logo de la Sección de Estadística">
+                        <img class="logo-ub" src="{% static 'img/logo_home_nou.png' %}" alt="Logo de la Universitat de Barcelona">
+                    </div>
+                    <div id="loading">
+                        Loading
+                        <span id="loading-dots"></span>
+                    </div>
+                    <div id="press-any-key">
+                        <p>Presiona cualquier tecla</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</div>
+</div> -->
+<section id="mapContainer" class="container">
+    <div id="map">
+
+    </div>
+    <script src="{% static 'js/leaflet-heat.js' %}"></script>
+    <!-- <aside>
+        <div id="asideTitle">
+            <p>Properties</p>
+        </div>
+        <div class="element">
+            <input type="file" name="outputFile" id="outputFile">
+            
+        </div>
+    </aside> -->
+    <div id="position">
+        <div class="blur">
+            lat: <span id="lat"></span><br> lng: <span id="lng"></span>
+        </div>
+    </div>
+    <!-- <div id="panel">
+        <div class="blur">
+            <img class="icon red" id="folders-button" src="{% static 'img/dibujo.svg' %}" alt="" srcset="">
+            <img class="icon blue" id="neural-network-button" src="{% static 'img/dibujo-1.svg' %}" alt="" srcset="">
+            <img class="icon green" id="configuration-button" src="{% static 'img/dibujo-2.svg' %}" alt="" srcset="">
+            <img class="icon dark" id="info-button" src="{% static 'img/info.svg' %}" alt="" srcset="">
+        </div>
+    </div> -->
+</section>
+<script src="{% static 'js/map.js' %}"></script>
+<!-- <script src="{% static 'js/load_web.js' %}"></script> -->
+{% endblock %}

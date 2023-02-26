@@ -14,6 +14,20 @@
             background-position: 0% 0%;
         }
     }
+    /* @keyframes dots {
+        0% {
+            content: ".";
+        }
+        33% {
+            content: "..";
+        }
+        66% {
+            content: "...";
+        }
+        100% {
+            content: ".";
+        }
+    } */
     
     html,
     body {
@@ -29,24 +43,104 @@
     padding-left: 30px;
 } */
     
-    header {
-        height: 7vh;
-        min-height: 40px;
-        margin: 0;
-        padding: 0;
-        border-bottom: 2px solid gray;
-        background-color: white;
-        z-index: 10;
+    #main-nav {
+        background: linear-gradient(to bottom, #3a3a3a, #000000);
+        color: #ffffff;
+        font-size: 18px;
+        padding: 10px;
+        position: relative;
+        z-index: 99;
     }
     
-    #mapContainer {
+    #main-nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+    }
+    
+    #main-nav ul li {
+        margin-right: 20px;
+        cursor: pointer;
+    }
+    
+    #main-nav ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        position: relative;
+        transition: background-color 0.3s ease;
+    }
+    
+    #main-nav ul li a:hover {
+        background-color: #3d3d3d;
+        color: rgb(255, 166, 0)
+    }
+    
+    #main-nav ul li a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: transform 0.3s ease;
+    }
+    
+    #main-nav ul li a:hover::after {
+        transform: scale(1.2);
+    }
+    
+    #main-nav ul li a:active {
+        background-color: #555555;
+    }
+    
+    #main-nav ul li ul {
+        display: none;
+        position: absolute;
+        background-color: #333333;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    #main-nav ul li:hover ul {
+        display: block;
+    }
+    
+    #main-nav ul li ul li {
+        display: block;
+        margin: 10px 0;
+    }
+    
+    #main-nav ul li ul li a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    .container {
         /* height: 92.6vh; */
-        height: 100vh;
+        height: 89.6vh;
         width: 100%;
         margin: 0;
         padding: 0;
         /* display: none; */
         z-index: 0;
+    }
+
+    .container .list{
+        padding: 1rem;
+    }
+
+    footer{
+        position: relative;
+        background: linear-gradient(to bottom, #3a3a3a, #000000);
+        color: #ffffff;    
+        margin: 0;
+        padding: 0.1rem;
+        text-align: center;
+        z-index: 101;
     }
     
     #mapContainer aside {
@@ -78,19 +172,6 @@
     #outputFile {
         width: 80%;
         padding: 1rem;
-    }
-    
-    #asideTitle {
-        background-color: rgb(148, 255, 144);
-        margin: 0;
-        padding: 1rem;
-        border-top-left-radius: 0.4rem;
-    }
-    
-    #asideTitle p {
-        margin: 0;
-        padding: 0;
-        color: black;
     }
     
     #panel {
@@ -153,89 +234,10 @@
         /* display: none; */
     }
     
-    .new-pop-up {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-    }
-    
-    .new-pop-up .blur {
-        position: relative;
-        background-color: rgba(0, 0, 0, 0.247);
-        width: 800px;
-        height: auto;
-        margin: auto;
-        z-index: 10;
-        box-shadow: 2px 2px 3px gray;
-        border-radius: 0.5rem;
-        /* border: 7px double white; */
-        cursor: grab;
-        padding: 1rem;
-    }
-    
-    .new-pop-up .blur h2 {
-        color: white;
-        text-align: center;
-        padding: 1.5rem;
-        margin: 0;
-    }
-    
-    #close {
-        position: absolute;
-        right: 0px;
-        width: 30px;
-        height: 30px;
-        cursor: pointer;
-        margin: 1rem;
-    }
-    
-    .new-pop-up .box {
-        display: flex;
-        width: 90%;
-        margin: auto;
-        /* padding-top: 3rem; */
-    }
-    
-    .new-pop-up .box>div {
-        position: relative;
-        width: 100%;
-        /* border: 5px double white; */
-        margin: 0.2rem;
-        color: white;
-        /* padding: 1rem; */
-    }
-    
-    .new-pop-up .box div h3 {
-        padding: 1rem;
-    }
-    
-    .file label {
-        background-color: rgb(0, 132, 255);
-        cursor: pointer;
-        padding: 1rem;
-        width: 30%;
-    }
-    
-    .file input[type=text] {
-        margin: 0;
-        background-color: white;
-        border: none;
-        width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        text-overflow: ellipsis;
-    }
-    
-    .file {
-        display: flex;
-        margin: 1rem;
-    }
-    
     #position {
         position: absolute;
-        right: 50px;
-        top: 25px;
+        right: 75px;
+        top: 40px;
         z-index: 10;
         color: white;
         font-size: 20px;
@@ -247,7 +249,7 @@
     #position .blur {
         background-color: rgba(0, 0, 0, 0.247);
         padding: 1rem;
-        width: 240px;
+        width: 300px;
         border-radius: 1rem;
     }
     
@@ -257,7 +259,6 @@
     
     #load-app .background {
         position: absolute;
-        height: 200px;
         background: rgb(113, 0, 139);
         background: -moz-linear-gradient(90deg, rgba(113, 0, 139, 1) 0%, rgba(191, 92, 23, 1) 22%, rgba(214, 104, 0, 1) 39%, rgba(0, 126, 159, 1) 73%, rgba(98, 0, 144, 1) 100%);
         background: -webkit-linear-gradient(90deg, rgba(113, 0, 139, 1) 0%, rgba(191, 92, 23, 1) 22%, rgba(214, 104, 0, 1) 39%, rgba(0, 126, 159, 1) 73%, rgba(98, 0, 144, 1) 100%);
@@ -285,6 +286,11 @@
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.493);
     }
     
+    #load-app .background .university-information header {
+        background-color: transparent;
+        color: white;
+    }
+    
     #info .university-information {
         color: white;
         font-size: 20px;
@@ -307,10 +313,87 @@
         font-size: 15px;
     }
     
-    aside {
-        position: relative;
-        width: 100%;
-        height: 10vh;
-        background-color: black;
+    #crear-nuevo-documento {
+        display: none;
+    }
+    
+    #importar-documento {
+        display: none;
+    }
+    
+    .popup {
+        position: fixed;
         z-index: 99;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .popup-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        width: 50%;
+    }
+    
+    .popup-content h2 {
+        margin-top: 0;
+    }
+    
+    .popup-content form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .popup-content label {
+        margin-top: 10px;
+    }
+    
+    .popup-content input,
+    .popup-content select,
+    .popup-content textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        margin-top: 5px;
+    }
+    
+    .popup-content button {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .popup-content button[type="submit"] {
+        background-color: #28a745;
+    }
+    
+    .popup-content button[type="submit"]:hover {
+        background-color: #218838;
+    }
+    
+    .popup-content button[type="button"] {
+        background-color: #dc3545;
+        margin-left: 10px;
+    }
+    
+    .popup-content button[type="button"]:hover {
+        background-color: #c82333;
+    }
+    
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
     }

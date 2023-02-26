@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plastic Detector es un proyecto de investigación del Grupo de Recerca BIOST3 de la Universitat de Barcelona">
+    <meta name="author" content="Roger Puga">
+    <meta property="og:title" content="PLASTIC DETECTOR">
+    <meta property="og:description" content="Plastic Detector es un proyecto de investigación del Grupo de Recerca BIOST3 de la Universitat de Barcelona">
+    <meta property="og:image" content="{% static 'img/logo-home.png' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  
+    <!-- jquery -->
+    <link rel="stylesheet" href="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{% static 'js/jquery-ui-1.13.2/external/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
+
+    <!-- leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <!-- leaflet timedimension -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.control.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/iso8601-js-period@0.2.1/iso8601.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leaflet-timedimension@1.1.1/dist/leaflet.timedimension.min.js"></script>
+    
+    <!-- heatmap scripts -->
+    <script type="text/javascript" src="{% static 'build/heatmap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'plugins/leaflet-heatmap/leaflet-heatmap.js' %}"></script>
+
+
+    <!-- Agregar la biblioteca moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+
+    <title>{% block title %}Título predeterminado{% endblock %}</title>
+</head>
+
+<body>
+    
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="{% url 'index' %}">Mapa</a>
+                <ul>
+                    <li><a>Cargar archivo</a></li>
+                </ul>
+            </li>
+            <li><a>Archivo</a>
+                <ul>
+                    <li><a id="crear-nuevo-documento-button">Crear nuevo documento</a></li>
+                    <li><a id="importar-documento-button">Importar documento</a></li>
+                    <li><a>Exportar documento</a></li>
+                    <li><a href="{% url  'listar_documentos' %}">Documentos añadidos</a></li>
+                </ul>
+            </li>
+            <li><a>Ver</a>
+                <ul>
+                    <li>
+                        <a>Documentos como tabla</a>
+                    </li>
+                    <li>
+                        <a>Preferencias</a>
+                    </li>
+                    <li>
+                        <a>Ayuda</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a>Editar</a>
+                <ul>
+                    <li><a>Copiar</a></li>
+                    <li><a>Cortar</a></li>
+                    <li><a>Pegar</a></li>
+                    <li><a>Deshacer</a></li>
+                    <li><a>Rehacer</a></li>
+                </ul>
+            </li>
+            <li><a>Ejecutar</a>
+                <ul>
+                    <li><a>Modelo de red neuronal</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="popup" id="crear-nuevo-documento">
+        <div class="popup-content">
+            <h2>Crear nuevo documento</h2>
+            <form>
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="description">Descripción:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="category">Categoría:</label>
+                <select id="category" name="category" required>
+              <option value="">Selecciona una categoría</option>
+              <option value="1">Categoría 1</option>
+              <option value="2">Categoría 2</option>
+              <option value="3">Categoría 3</option>
+            </select>
+                <div class="button-container">
+                    <button type="submit">Guardar</button>
+                    <button type="button" id="closeButton"">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup" id="importar-documento">
+        <div class="popup-content">
+            <h2>Importar documento</h2>
+            <form method="POST" action="{% url 'importar_documento' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="document">Seleccionar documento:</label>
+                <input type="file" id="document" name="document" accept=".csv" required>
+                <div class="button-container">
+                    <button type="submit">Importar</button>
+                    <button type="button" id="closeButton">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        {% block content %} {% endblock %}
+    </main>
+
+    <footer>
+        <p>
+            <span>Universitat de Barcelona (2023) - Grup de Recerca BIOST3. Section of Statistics. Departament of Genètics, Microbiology and Statistics.</span>
+        </p>
+    </footer>
+
+
+    <script src="{% static 'js/popup-open.js' %}"></script>
+</body>
+
+</html>

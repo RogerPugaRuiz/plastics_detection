@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Documentos {% endblock %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="list">
+        <h1>Documentos Importados</h1>
+        <ul>
+            {% for documento in documentos %}
+            <li>{{ documento.title }}</li>
+            {% empty %}
+            <li>No hay documentos importados</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

@@ -25,7 +25,6 @@ function doLoop() {
         })
 
     } else {
-        console.log(timer)
         setTimeout(doLoop, 500)
     }
 

@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="es">
 
 <head>
-    <!-- {% load static %} -->
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <link rel="stylesheet" href="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.css' %}">
 
+    <meta name="description" content="Plastic Detector es un proyecto de investigación del Grupo de Recerca BIOST3 de la Universitat de Barcelona">
+    <meta name="author" content="Roger Puga">
+    <meta property="og:title" content="PLASTIC DETECTOR">
+    <meta property="og:description" content="Plastic Detector es un proyecto de investigación del Grupo de Recerca BIOST3 de la Universitat de Barcelona">
+    <meta property="og:image" content="{% static 'img/logo-home.png' %}">
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <script type="text/javascript" src="{% static 'build/heatmap.js' %}"></script>
     <script type="text/javascript" src="{% static 'plugins/leaflet-heatmap/leaflet-heatmap.js' %}"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.css' %}">
     <script src="{% static 'js/jquery-ui-1.13.2/external/jquery/jquery.js' %}"></script>
     <script src="{% static 'js/jquery-ui-1.13.2/jquery-ui.min.js' %}"></script>
-
-    <title>PLASTICS DETECTION</title>
+    <title>PLASTIC DETECTOR</title>
 
 </head>
 
@@ -33,128 +35,122 @@
     <div id="load-app">
         <div class="background" id="change-color">
             <div class="university-information">
-                <h1>
-                    PLASTIC DETECTOR
-                </h1>
-                <p>
-                    Universitat de Barcelona (2023)-Grup de Recerca BIOST3. Section of Statistics. Departament of Genètics, Microbiology and Statistics.
-                </p>
-                <p>
-                    Desarrollador: Roger Puga Equipo investigador: Joaquin Justel, Odei Garin
-                </p>
-                <p>
-                    Dirección Técnica: Toni Monleón-Getino
-                </p>
-
-                <img class="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="logo BIOST3">
-
-                <img class="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="logo sección de estadistica">
-
-                <img class="logo-biost3" src="{% static 'img/logo_home_nou.png' %}" alt="logo Universitat de Barcelona">
-
-                <div id="loading">
-                    Loading
-                    <span id="loading-dots"></span>
-                </div>
-                <div id="press-any-key">
-                    <p>Presiona cualquier tecla</p>
-                </div>
-
+                <header>
+                    <h1>PLASTIC DETECTOR</h1>
+                    <p>
+                        <span>Universitat de Barcelona (2023) - Grup de Recerca BIOST3. Section of Statistics. Departament of Genètics, Microbiology and Statistics.</span>
+                    </p>
+                </header>
+                <main>
+                    <section>
+                        <div>
+                            <p>Desarrollador: Roger Puga</p>
+                            <p>Equipo investigador: Joaquin Justel, Odei Garin</p>
+                            <p>Dirección Técnica: Toni Monleón-Getino</p>
+                        </div>
+                        <div>
+                            <img class="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="Logo del Grupo de Investigación BIOST3">
+                            <img class="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="Logo de la Sección de Estadística">
+                            <img class="logo-ub" src="{% static 'img/logo_home_nou.png' %}" alt="Logo de la Universitat de Barcelona">
+                        </div>
+                        <div id="loading">
+                            Loading
+                            <span id="loading-dots"></span>
+                        </div>
+                        <div id="press-any-key">
+                            <p>Presiona cualquier tecla</p>
+                        </div>
+                    </section>
+                </main>
             </div>
+        </div>
+    </div>
+    </div>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a>Archivo</a>
+                <ul>
+                    <li><a>Crear nuevo documento</a></li>
+                    <li><a id="importar-documento-button">Importar documento</a></li>
+                    <li><a>Exportar documento</a></li>
+                    <li><a>Documentos añadidos</a></li>
+                </ul>
+            </li>
+            <li><a>Ver</a>
+                <ul>
+                    <li>
+                        <a>Documentos como tabla</a>
+                    </li>
+                    <li>
+                        <a>Preferencias</a>
+                    </li>
+                    <li>
+                        <a>Ayuda</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a>Editar</a>
+                <ul>
+                    <li><a>Copiar</a></li>
+                    <li><a>Cortar</a></li>
+                    <li><a>Pegar</a></li>
+                    <li><a>Deshacer</a></li>
+                    <li><a>Rehacer</a></li>
+                </ul>
+            </li>
+            <li><a>Ejecutar</a>
+                <ul>
+                    <li><a>Modelo de red neuronal</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="popup" id="crear-nuevo-documento">
+        <div class="popup-content">
+            <h2>Crear nuevo documento</h2>
+            <form>
+                <label for="title">Título:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="description">Descripción:</label>
+                <textarea id="description" name="description" required></textarea>
+                <label for="category">Categoría:</label>
+                <select id="category" name="category" required>
+              <option value="">Selecciona una categoría</option>
+              <option value="1">Categoría 1</option>
+              <option value="2">Categoría 2</option>
+              <option value="3">Categoría 3</option>
+            </select>
+                <div class="button-container">
+                    <button type="submit">Guardar</button>
+                    <button type="button" onclick="closePopup()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup" id="importar-documento">
+        <div class="popup-content">
+            <h2>Importar documento</h2>
+            <form method="POST" action="{% url 'importar_documento' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="document">Seleccionar documento:</label>
+                <input type="file" id="document" name="document" accept=".csv" required>
+                <div class="button-container">
+                    <button type="submit">Importar</button>
+                    <button type="button" onclick="closePopup()">Cancelar</button>
+                </div>
+            </form>
         </div>
     </div>
 
 
-    <div class="pop-up">
-        <div id="folders" class="new-pop-up">
-            <div class="blur">
-                <img id="close" src="{% static 'img/close.svg' %}" alt="">
-                <h2>FOLDERS</h2>
-                <div class="box">
-                    <!-- <div id="neural-network-files">
-                        <h3>Network neural files</h3>
-                        <div id="input-box" class="file">
-                            <input type="file" name="inputFolder" id="inputFolder" hidden webkitdirectory directory multiple>
-                            <label for="inputFolder" id="inputFolder-label">Images</label>
-                            <input type="text" name="inputFolder-text" id="inputFolder-text" disabled>
-                        </div>
-                        <input type="checkbox" name="saveOnServer" id="saveOnServer">
-                        <label for="saveOnServer">save images to server</label>
 
-                        <input type="file" name="image-files" id="image-files" multiple>
-                        <label for="image-files">Insert images</label>
-                        <input type="file" id="ctrl" webkitdirectory directory multiple/> -->
-                    <!-- </div> -->
-                    <div id="map-viewer-files">
-                        <!-- <h3>Map viewer files</h3> -->
-                        <div id="csvFile-box" class="file">
-                            <input type="file" name="csvFile" id="csvFile" hidden accept=".csv">
-                            <label for="csvFile" id="csvFile-label">csv file</label>
-                            <input type="text" name="csvFile-text" id="csvFile-text" disabled>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="neural-network" class="new-pop-up">
-            <div class="blur">
-                <img id="close" src="{% static 'img/close.svg' %}" alt="">
-                <h2>CONVOLUTIONAL NEURAL NETWORK</h2>
-                <div id="run">
-                    <img id="start-button" src="{% static 'img/start.svg' %}" alt="" srcset="">
-                    <div>
-                        <div id="image-collection">
 
-                        </div>
+    <!-- <aside>
 
-                        <div id="load">
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div id="configuration" class="new-pop-up">
-            <div class="blur">
-                <img id="close" src="{% static 'img/close.svg' %}" alt="">
-                <h2>CONFIGURATION</h2>
-            </div>
-        </div>
-        <div id="info" class="new-pop-up">
-            <div class="blur">
-                <img id="close" src="{% static 'img/close.svg' %}" alt="">
-                <h2>PLASTIC DETECTOR</h2>
-                <div class="university-information">
-                    <p>
-                        Universitat de Barcelona (2023)-Grup de Recerca BIOST3. Section of Statistics. Departament of Genètics, Microbiology and Statistics.
-                    </p>
-                    <p>
-                        Desarrollador: Roger Puga Equipo investigador: Joaquin Justel, Odei Garin
-                    </p>
-                    <p>
-                        Dirección Técnica: Toni Monleón-Getino
-                    </p>
-
-                    <img class="logo-biost3" src="{% static 'img/logo BIOST3.png' %}" alt="logo BIOST3">
-
-                    <img class="logo-estadistica" src="{% static 'img/seccio-estadistica.png' %}" alt="logo sección de estadistica">
-
-                    <img class="logo-biost3" src="{% static 'img/logo_home_nou.png' %}" alt="logo Universitat de Barcelona">
-
-                    <p class="size-15">
-                        Datos de ejemplo <a href="http://biost3.bio.ub.edu/static/db/20220318_130430_plastic_output.csv">http://biost3.bio.ub.edu/static/db/20220318_130430_plastic_output.csv</a>
-                    </p>
-
-                </div>
-            </div>
-        </div>
-        <!-- <div id="dark-efect">
-        </div> -->
-    </div>
-    <aside>
-
-    </aside>
+    </aside> -->
     <section id="mapContainer">
         <div id="map">
 
@@ -186,9 +182,10 @@
 
 
     <script src="{% static 'js/map.js' %}"></script>
-    <script src="{% static 'js/openAndCloseWindows.js' %}"></script>
-    <script src="{% static 'js/folders.js' %}"></script>
     <script src="{% static 'js/load_web.js' %}"></script>
+    <script src="{% static 'js/popup-open.js' %}"></script>
+    <script src="{% static 'js/popup-close.js' %}"></script>
+
 </body>
 
 </html>
