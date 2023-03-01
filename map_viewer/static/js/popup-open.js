@@ -21,3 +21,5 @@ function togglePopup(buttonId, popupId) {
 
 togglePopup("importar-documento-button", "importar-documento");
 togglePopup("crear-nuevo-documento-button", "crear-nuevo-documento");
+togglePopup("agregar-documento-al-mapa-button", "agregar-documento-al-mapa");
+togglePopup("agregar-documento-local-al-mapa-button", "agregar-documento-local-al-mapa")

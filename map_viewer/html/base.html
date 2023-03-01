@@ -48,9 +48,6 @@
     <nav id="main-nav">
         <ul>
             <li><a href="{% url 'index' %}">Mapa</a>
-                <ul>
-                    <li><a>Cargar archivo</a></li>
-                </ul>
             </li>
             <li><a>Archivo</a>
                 <ul>
@@ -58,6 +55,9 @@
                     <li><a id="importar-documento-button">Importar documento</a></li>
                     <li><a>Exportar documento</a></li>
                     <li><a href="{% url  'listar_documentos' %}">Documentos añadidos</a></li>
+                    <hr>
+                    <li><a id="agregar-documento-al-mapa-button">Agregar documneto al mapa</a></li>
+                    <li><a id="agregar-documento-local-al-mapa-button">Agregar documneto local al mapa</a></li>
                 </ul>
             </li>
             <li><a>Ver</a>
@@ -128,6 +128,36 @@
         </div>
     </div>
 
+    <div class="popup" id="agregar-documento-al-mapa">
+        <div class="popup-content">
+            <h2>Agregar documento al mapa</h2>
+            <form id="search-form">
+                {% csrf_token %}
+                <input type="text" name="q" placeholder="Buscar documento..." autocomplete="off">
+                <div id="resultado-busqueda-por-nombre"></div>
+                <div class="button-container">
+                    <button type="submit" id="add-name-data">Agregar</button>
+                    <button type="button" id="closeButton">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup" id="agregar-documento-local-al-mapa">
+        <div class="popup-content">
+            <h2>Agregar documento local al mapa</h2>
+            <form id="agregar-documento-local-al-mapa-form" action="">
+
+                <label for="local-document">Seleccionar documento:</label>
+                <input type="file" id="local-document" name="local-document" accept=".csv" required>
+                <div class="button-container">
+                    <button type="submit" id="agregar-documento-local-al-mapa-submit">Agregar</button>
+                    <button type="button" id="closeButton">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <main>
         {% block content %} {% endblock %}
     </main>
@@ -140,6 +170,8 @@
 
 
     <script src="{% static 'js/popup-open.js' %}"></script>
+    <script src="{% static 'js/ajax.js' %}"></script>
+    <script src="{% static 'js/local.js' %}"></script>
 </body>
 
 </html>

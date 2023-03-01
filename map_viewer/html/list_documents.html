@@ -1,17 +1,61 @@
-{% extends "base.html" %}
-{% block title %} Documentos {% endblock %}
-{% block content %}
+{% extends "base.html" %} 
+{% block title %} Documentos {% endblock %} 
+{% block content %} 
 {% load static %}
 <div class="container">
-    <div class="list">
-        <h1>Documentos Importados</h1>
-        <ul>
-            {% for documento in documentos %}
-            <li>{{ documento.title }}</li>
-            {% empty %}
-            <li>No hay documentos importados</li>
-            {% endfor %}
-        </ul>
-    </div>
+  <div class="box">
+    <h1 class="table-title">Lista de documentos</h1>
+    <table id="table-documents">
+      <thead>
+        <tr>
+          <th>Documento</th>
+          <th>Fecha y hora</th>
+          <th>Numero de coordenadas</th>
+          <th>Coordenadas</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for document in documents %}
+        <tr>
+          <td>{{ document.title }}</td>
+          <td>{{ document.date_time }}</td>
+          <td>{{ document.coordinates.all.count }}</td>
+          <td>
+            <table id="table-coordinates">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Latitud</th>
+                  <th>Longitud</th>
+                  <th>Time</th>
+                  <th>Plástico objeto</th>
+                  <th>Medusas</th>
+                  <th>Otros</th>
+                  <th>Plástico agregados</th>
+                  <th>Boyas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for coordenate in document.coordinates.all %}
+                <tr>
+                  <td>{{ coordenate.name }}</td>
+                  <td>{{ coordenate.latitud }}</td>
+                  <td>{{ coordenate.longitud }}</td>
+                  <td>{{ coordenate.time }}</td>
+                  <td>{{ coordenate.plastico_objeto }}</td>
+                  <td>{{ coordenate.medusas }}</td>
+                  <td>{{ coordenate.otros }}</td>
+                  <td>{{ coordenate.plastico_agregados }}</td>
+                  <td>{{ coordenate.boyas }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}

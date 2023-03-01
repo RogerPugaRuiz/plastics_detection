@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container">
+    <div class="box">
+        <h1>Eliminar todos los documentos</h1>
+        <p>¿Está seguro de que desea eliminar todos los documentos? Esta acción no se puede deshacer.</p>
+        <form method="POST" action="{% url 'borrar_documentos' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Eliminar todos los documentos</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

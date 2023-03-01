@@ -19,7 +19,7 @@ var geojson = {
         coordinates: [10.2, 47.5]
       },
       properties: {
-        time: '2023-02-22T10:30:00Z'
+        time: '2023-02-22T10:30:00'
       }
     },
     {
@@ -29,7 +29,7 @@ var geojson = {
         coordinates: [10.1, 47.4]
       },
       properties: {
-        time: '2023-02-21T11:00:00Z'
+        time: '2023-02-21T11:00:00'
       }
     },
     {
@@ -59,7 +59,7 @@ var date = new Date('2014-10-01T00:00:00Z').toISOString()
 
 // Crea el mapa con la capa de tiempo
 var map = L.map('map', {
-  center: [10.3, 47.6],
+  center: [41.356, 2.176],
   zoom: 10,
   timeDimension: true,
   timeDimensionOptions: {
@@ -77,18 +77,30 @@ var map = L.map('map', {
   // layers: [mapLayer, timeDimensionLayer]
 })
 
-var data = extractCoordsAndTimes(geojson)
+  // Obtener la URL actual
+  var urlActual = window.location.href;
+  
+  // Crear un objeto URLSearchParams
+  var searchParams = new URLSearchParams(new URL(urlActual).search);
+  
+  // Obtener el valor del parámetro 'q'
+  var qParam = searchParams.get('q');
+  
+  // Decodificar el valor del parámetro 'q'
+  var qValue = decodeURIComponent(qParam);
+  
+  searchByName(qValue)
 // Crea una capa de tiempo con los datos y el heatmap
 var heatmapLayer = L.heatLayer([], {
-  radius: 15,
-  blur: 10,
+  radius: 25,
+  blur: 20,
   scaleRadius: true,
   maxZoom: 12,
   gradient: {
-    0.4: 'blue',
-    0.6: 'green',
-    0.8: 'yellow',
-    1.0: 'red'
+    0.4: 'rgba(0, 0, 255, 0.05)',
+    0.6: 'rgba(0, 255, 0, 0.05)',
+    0.8: 'rgba(255, 255, 0, 0.05)',
+    1.0: 'rgba(255, 0, 0, 0.05)'
   }
 })
 
@@ -108,8 +120,8 @@ var timeLayer = L.timeDimension.layer({
 timeLayer.addTo(map)
 
 // var timeDimensionControl = L.control.timeDimension({
-//   position: "bottomleft",
-//   autoPlay: true,
+  //   position: "bottomleft",
+  //   autoPlay: true,
 //   playerOptions: {
 //       buffer: 10,
 //       transitionTime: 1000
@@ -123,39 +135,55 @@ timeLayer.addTo(map)
 heatmapLayer.addTo(map)
 mapLayer.addTo(map)
 
+setInterval(mostrarDatosActuales, 1000);
+
 function mostrarDatosActuales() {
   // Obtener el tiempo actual del TimeDimensionControl
   var tiempoActual = map.timeDimension.getCurrentTime();
   var tiempoActual = new Date(tiempoActual);
   // Obtener los tiempos disponibles en la capa de tiempo
   var tiemposDisponibles = timeLayer.options.times;
-
+  
+  
   // Filtrar los datos que coincidan con el tiempo actual del controlador
   var datosActuales = data.filter(function(dato) {
-    // console.log(dato.time)
-    // console.log(tiempoActual.toISOString().slice(0, -5) + 'Z')
-    return dato.time === tiempoActual.toISOString().slice(0, -5) + 'Z';
+    console.log(dato.time)
+    console.log(tiempoActual.toISOString().slice(0, -5))
+    return dato.time === tiempoActual.toISOString().slice(0, -5);
   });
 
   // Mostrar los datos en la consola
-  console.log(datosActuales);
-
   heatmapLayer.setLatLngs(datosActuales)
+}
+
+function searchByName(nombre) {
+  $.ajax({
+    url: "http://127.0.0.1:8000/cargar-con-ajax",
+    data: {
+      'q': nombre,
+    },
+    dataType: "json",
+    success: function(response) {
+      data = response.data;
+      console.log(data);
+    },
+    error: function(xhr, status, error) {
+      console.log("Ha ocurrido un error:", error);
+    }
+  });
 }
 
 
 
-
-setInterval(mostrarDatosActuales, 1000);
 // Crea el TimeDimension control y agrégalo al mapa
 // var timeDimensionControl = new L.Control.TimeDimension({
-//   timeDimension: timeDimension,
-//   position: 'bottomleft',
+  //   timeDimension: timeDimension,
+  //   position: 'bottomleft',
 //   autoPlay: true,
 //   playerOptions: {
-//     transitionTime: 1000,
-//     loop: true
-//   }
+  //     transitionTime: 1000,
+  //     loop: true
+  //   }
 // })
 
 // timeDimensionControl.addTo(map)
