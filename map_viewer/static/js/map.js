@@ -93,7 +93,7 @@ var map = L.map('map', {
 // Crea una capa de tiempo con los datos y el heatmap
 var heatmapLayer = L.heatLayer([], {
   radius: 25,
-  blur: 20,
+  blur: 30,
   scaleRadius: true,
   maxZoom: 12,
   gradient: {
@@ -135,26 +135,69 @@ timeLayer.addTo(map)
 heatmapLayer.addTo(map)
 mapLayer.addTo(map)
 
-setInterval(mostrarDatosActuales, 1000);
+// setInterval(mostrarDatosActuales,100);
 
-function mostrarDatosActuales() {
-  // Obtener el tiempo actual del TimeDimensionControl
-  var tiempoActual = map.timeDimension.getCurrentTime();
-  var tiempoActual = new Date(tiempoActual);
-  // Obtener los tiempos disponibles en la capa de tiempo
-  var tiemposDisponibles = timeLayer.options.times;
+// function mostrarDatosActuales() {
+//   // Obtener el tiempo actual del TimeDimensionControl
+//   var tiempoActual = map.timeDimension.getCurrentTime();
+//   var tiempoActual = new Date(tiempoActual);
+//   // Obtener los tiempos disponibles en la capa de tiempo
+//   var tiemposDisponibles = timeLayer.options.times;
   
   
-  // Filtrar los datos que coincidan con el tiempo actual del controlador
-  var datosActuales = data.filter(function(dato) {
-    console.log(dato.time)
-    console.log(tiempoActual.toISOString().slice(0, -5))
-    return dato.time === tiempoActual.toISOString().slice(0, -5);
+//   // Filtrar los datos que coincidan con el tiempo actual del controlador
+//   var datosActuales = data.filter(function(dato) {
+//     console.log(dato.time)
+//     console.log(tiempoActual.toISOString().slice(0, -5))
+//     return dato.time === tiempoActual.toISOString().slice(0, -5);
+//   });
+
+//   // Mostrar los datos en la consola
+//   heatmapLayer.setLatLngs(datosActuales)
+// }
+
+// Obtener el tiempo actual del TimeDimensionControl
+
+var dataReady = new Promise(function(resolve, reject) {
+  var intervalId = setInterval(function() {
+    if (typeof data !== 'undefined') {
+      clearInterval(intervalId);
+      resolve();
+    }
+  }, 100);
+});
+
+
+// Indexar los datos por tiempo
+var datosPorTiempo = {};
+
+dataReady.then(function() {
+  data.forEach(function(dato) {
+    var tiempoStr = dato.time
+    if (!datosPorTiempo[tiempoStr]) {
+      datosPorTiempo[tiempoStr] = [];
+    }
+      datosPorTiempo[tiempoStr].push(dato);
   });
 
-  // Mostrar los datos en la consola
-  heatmapLayer.setLatLngs(datosActuales)
+});
+
+map.timeDimension.on("timeload", function(data){
+  var tiempoActual = data.time
+  if (typeof tiempoActual === 'number') {
+    tiempoActual = new Date(tiempoActual);
+  }
+  var tiempoActualStr = tiempoActual.toISOString().slice(0, -5);
+  mostrarDatosActuales(tiempoActualStr)
+})
+
+// Mostrar los datos actuales
+function mostrarDatosActuales(tiempoActualStr) {
+  var datosActuales = datosPorTiempo[tiempoActualStr] || [];
+  console.log(datosActuales)
+  heatmapLayer.setLatLngs(datosActuales);
 }
+
 
 function searchByName(nombre) {
   $.ajax({
@@ -165,7 +208,7 @@ function searchByName(nombre) {
     dataType: "json",
     success: function(response) {
       data = response.data;
-      console.log(data);
+      // console.log(data);
     },
     error: function(xhr, status, error) {
       console.log("Ha ocurrido un error:", error);
