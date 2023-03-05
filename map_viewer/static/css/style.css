@@ -441,7 +441,7 @@
         margin-top: 0;
     }
 
-    .popup-content form {
+    .popup-content .form-box {
         display: flex;
         flex-direction: column;
     }

@@ -72,31 +72,3 @@ $(document).ready(function() {
       console.log("click")
     })
   }
-  
-
-//   $(document).ready(function() {
-//     const query = $('input[name="q"]').val();
-//     // Configurar el campo de texto con autocompletado
-//     $('#search-input').autocomplete({
-//       source: function(request, response) {
-//         // Realizar una petición AJAX para obtener los resultados de autocompletado
-//         $.ajax({
-//           url: form.attr('action'),  // URL de la vista que maneja la búsqueda
-//           data: {
-//             'q': query
-//           },
-//           dataType: 'json',
-//           success: function(data) {
-//             // Pasar los resultados a la función de respuesta de autocompletado
-//             response($.map(data, function(item) {
-//               return {
-//                 label: item.title,  // Etiqueta que se muestra en el autocompletado
-//                 value: item.id  // Valor que se guarda en el campo de texto al seleccionar un resultado
-//               };
-//             }));
-//           }
-//         });
-//       },
-//       minLength: 3  // Cantidad mínima de caracteres para activar el autocompletado
-//     });
-//   });
