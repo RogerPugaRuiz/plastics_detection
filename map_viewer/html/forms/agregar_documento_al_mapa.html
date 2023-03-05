@@ -1,0 +1,14 @@
+<div class="popup" id="agregar-documento-al-mapa">
+    <div class="popup-content">
+        <h2>Agregar documento al mapa</h2>
+        <form id="search-form">
+            {% csrf_token %}
+            <input type="text" name="q" placeholder="Buscar documento..." autocomplete="off">
+            <div id="resultado-busqueda-por-nombre"></div>
+            <div class="button-container">
+                <button type="submit" id="add-name-data">Agregar</button>
+                <button type="button" id="closeButton">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

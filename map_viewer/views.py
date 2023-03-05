@@ -1,22 +1,25 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-from map_viewer.models import Document, Coordinate
+from map_viewer.models import Document, Coordinate, Navigator, Element, create_navigator
+from django.urls import reverse
+
 import csv
 import json
 # Create your views here.
 
 
 def index(request):
-    ejemplo_datos = ["hola", "mundo"]
-
+    navigator = create_navigator()
+    
     if request.method == 'POST':
         return render(request, 'map.html')
 
     if request.method == "GET":
-        return render(request, 'map.html')
+        return render(request, 'map.html', {'nav':navigator.at_list()})
 
 def import_document(request):
     if request.method == 'POST':
+        navigator = create_navigator()
         doc = request.FILES['document']
         title = doc.name
 
@@ -25,7 +28,7 @@ def import_document(request):
 
         return redirect('listar_documentos')
 
-    return render(request, 'map_viewer.html')
+    return render(request, 'map.html', {'nav':navigator.at_list()})
 
 
 def find_document_ajax(request):
@@ -43,10 +46,12 @@ def find_document_ajax(request):
 
 def list_documents(request):
     documents = Document.objects.all()
+    navigator = create_navigator()
     # coordinates = Coordenate.objects.all()
-    return render(request, 'list_documents.html', {'documents': documents})
+    return render(request, 'list_documents.html', {'documents': documents, 'nav':navigator.at_list()})
 
 def delete_all_documents(request):
+    navigator = create_navigator()
     if request.method == 'POST':
         # Borrar todos los objetos Document
         documents = Document.objects.all()
@@ -55,7 +60,7 @@ def delete_all_documents(request):
         # Redirigir al usuario a otra página, por ejemplo la página de inicio
         return redirect('index')
     # Si el método no es POST, mostrar el formulario para confirmar la acción
-    return render(request, 'borrar_documentos.html')
+    return render(request, 'borrar_documentos.html', {'nav':navigator.at_list()})
 
 def load_map_data(request):
     search = request.GET.get('q', '')

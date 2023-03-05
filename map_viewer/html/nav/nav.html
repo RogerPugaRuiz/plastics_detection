@@ -1,0 +1,29 @@
+<nav id="main-nav">
+    <ul>
+        {% for element in nav %}
+            <li>
+                {% if element.href_element %}
+                    {% include "nav/nav_link.html" with element=element %}
+                {% else %}
+                    {% include "nav/nav_text.html" with element=element %}
+                {% endif %}
+
+                {% if element.subelements %}
+                    <ul>
+                        {% for subelement in element.subelements %}
+                            {% if subelement.href_element %}
+                                <li>{% include "nav/nav_link.html" with element=subelement %}</li>
+                            {% else %}
+                                <li>{% include "nav/nav_text.html" with element=subelement %}</li>
+                            {% endif %}
+
+                            {% if subelement.add_separator %}
+                                <hr>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

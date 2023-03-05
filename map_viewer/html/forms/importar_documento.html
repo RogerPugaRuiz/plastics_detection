@@ -1,0 +1,14 @@
+<div class="popup" id="importar-documento">
+    <div class="popup-content">
+        <h2>Importar documento</h2>
+        <form method="POST" action="{% url 'importar_documento' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="document">Seleccionar documento:</label>
+            <input type="file" id="document" name="document" accept=".csv" required>
+            <div class="button-container">
+                <button type="submit">Importar</button>
+                <button type="button" id="closeButton">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

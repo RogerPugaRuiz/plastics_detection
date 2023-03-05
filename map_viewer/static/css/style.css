@@ -182,9 +182,7 @@
         margin: 0;
     }
 
-    #table-documents tr:nth-child(odd) {
-        /* background-color: #acacac; */
-    }
+
     #table-documents tr:nth-child(odd):hover{
         background-color: rgb(163, 157, 157);
     }
@@ -200,9 +198,7 @@
         padding: 0;
     }
 
-    #table-documents td:nth-child(3){
-        /* padding: 0.5rem; */
-    }
+
 
     #table-coordinates {
         background-color: white;

@@ -45,118 +45,16 @@
 <body>
     
 
-    <nav id="main-nav">
-        <ul>
-            <li><a href="{% url 'index' %}">Mapa</a>
-            </li>
-            <li><a>Archivo</a>
-                <ul>
-                    <li><a id="crear-nuevo-documento-button">Crear nuevo documento</a></li>
-                    <li><a id="importar-documento-button">Importar documento</a></li>
-                    <li><a>Exportar documento</a></li>
-                    <li><a href="{% url  'listar_documentos' %}">Documentos añadidos</a></li>
-                    <hr>
-                    <li><a id="agregar-documento-al-mapa-button">Agregar documneto al mapa</a></li>
-                    <li><a id="agregar-documento-local-al-mapa-button">Agregar documneto local al mapa</a></li>
-                </ul>
-            </li>
-            <li><a>Ver</a>
-                <ul>
-                    <li>
-                        <a>Documentos como tabla</a>
-                    </li>
-                    <li>
-                        <a>Preferencias</a>
-                    </li>
-                    <li>
-                        <a>Ayuda</a>
-                    </li>
-                </ul>
-            </li>
-            <li><a>Editar</a>
-                <ul>
-                    <li><a>Copiar</a></li>
-                    <li><a>Cortar</a></li>
-                    <li><a>Pegar</a></li>
-                    <li><a>Deshacer</a></li>
-                    <li><a>Rehacer</a></li>
-                </ul>
-            </li>
-            <li><a>Ejecutar</a>
-                <ul>
-                    <li><a>Modelo de red neuronal</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    {% include 'nav/nav.html' %}
 
-    <div class="popup" id="crear-nuevo-documento">
-        <div class="popup-content">
-            <h2>Crear nuevo documento</h2>
-            <form>
-                <label for="title">Título:</label>
-                <input type="text" id="title" name="title" required>
-                <label for="description">Descripción:</label>
-                <textarea id="description" name="description" required></textarea>
-                <label for="category">Categoría:</label>
-                <select id="category" name="category" required>
-              <option value="">Selecciona una categoría</option>
-              <option value="1">Categoría 1</option>
-              <option value="2">Categoría 2</option>
-              <option value="3">Categoría 3</option>
-            </select>
-                <div class="button-container">
-                    <button type="submit">Guardar</button>
-                    <button type="button" id="closeButton"">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    {% include 'forms/crear_nuevo_documento.html' %}
 
-    <div class="popup" id="importar-documento">
-        <div class="popup-content">
-            <h2>Importar documento</h2>
-            <form method="POST" action="{% url 'importar_documento' %}" enctype="multipart/form-data">
-                {% csrf_token %}
-                <label for="document">Seleccionar documento:</label>
-                <input type="file" id="document" name="document" accept=".csv" required>
-                <div class="button-container">
-                    <button type="submit">Importar</button>
-                    <button type="button" id="closeButton">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    {% include 'forms/importar_documento.html' %}
 
-    <div class="popup" id="agregar-documento-al-mapa">
-        <div class="popup-content">
-            <h2>Agregar documento al mapa</h2>
-            <form id="search-form">
-                {% csrf_token %}
-                <input type="text" name="q" placeholder="Buscar documento..." autocomplete="off">
-                <div id="resultado-busqueda-por-nombre"></div>
-                <div class="button-container">
-                    <button type="submit" id="add-name-data">Agregar</button>
-                    <button type="button" id="closeButton">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    {% include 'forms/agregar_documento_al_mapa.html' %}
 
-    <div class="popup" id="agregar-documento-local-al-mapa">
-        <div class="popup-content">
-            <h2>Agregar documento local al mapa</h2>
-            <form id="agregar-documento-local-al-mapa-form" action="">
+    {% include 'forms/agregar_documento_local_al_mapa.html' %}
 
-                <label for="local-document">Seleccionar documento:</label>
-                <input type="file" id="local-document" name="local-document" accept=".csv" required>
-                <div class="button-container">
-                    <button type="submit" id="agregar-documento-local-al-mapa-submit">Agregar</button>
-                    <button type="button" id="closeButton">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <main>
         {% block content %} {% endblock %}
