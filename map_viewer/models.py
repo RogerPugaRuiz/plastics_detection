@@ -4,7 +4,6 @@ from django.urls import reverse
 from plastic_detection import settings
 import os
 import csv
-import magic
 import subprocess
 from django.core.exceptions import ValidationError
 
