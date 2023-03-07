@@ -69,34 +69,8 @@ $(document).ready(function() {
     submit_button = $('#add-name-data')
     input = $('input[name="q"]');
     submit_button.on("click", function(){
-      console.log("click")
+      const name = input.val();
+      sessionStorage.setItem('file', name);
+      window.location.href = "http://127.0.0.1:8000/"
     })
   }
-  
-
-//   $(document).ready(function() {
-//     const query = $('input[name="q"]').val();
-//     // Configurar el campo de texto con autocompletado
-//     $('#search-input').autocomplete({
-//       source: function(request, response) {
-//         // Realizar una petición AJAX para obtener los resultados de autocompletado
-//         $.ajax({
-//           url: form.attr('action'),  // URL de la vista que maneja la búsqueda
-//           data: {
-//             'q': query
-//           },
-//           dataType: 'json',
-//           success: function(data) {
-//             // Pasar los resultados a la función de respuesta de autocompletado
-//             response($.map(data, function(item) {
-//               return {
-//                 label: item.title,  // Etiqueta que se muestra en el autocompletado
-//                 value: item.id  // Valor que se guarda en el campo de texto al seleccionar un resultado
-//               };
-//             }));
-//           }
-//         });
-//       },
-//       minLength: 3  // Cantidad mínima de caracteres para activar el autocompletado
-//     });
-//   });
