@@ -11,7 +11,7 @@
           <th>Documento</th>
           <th>Fecha y hora</th>
           <th>Numero de coordenadas</th>
-          <th>Coordenadas</th>
+          <!-- <th>Coordenadas</th> -->
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
           <td>{{ document.title }}</td>
           <td>{{ document.date_time }}</td>
           <td>{{ document.coordinates.all.count }}</td>
-          <td>
+          <!-- <td>
             <table id="table-coordinates">
               <thead>
                 <tr>
@@ -51,7 +51,7 @@
                 {% endfor %}
               </tbody>
             </table>
-          </td>
+          </td> -->
         </tr>
         {% endfor %}
       </tbody>

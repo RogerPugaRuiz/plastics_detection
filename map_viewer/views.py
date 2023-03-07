@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from map_viewer.models import Document, Coordinate, Navigator, Element, create_navigator
 from django.urls import reverse
-
+import logging
 import csv
 import json
 # Create your views here.
@@ -18,15 +18,19 @@ def index(request):
         return render(request, 'map.html', {'nav':navigator.at_list()})
 
 def import_document(request):
+    navigator = create_navigator()
     if request.method == 'POST':
-        navigator = create_navigator()
-        doc = request.FILES['document']
-        title = doc.name
+        try:
+            doc = request.FILES['document']
+            title = doc.name.encode('utf-8')  # Codificar el título con UTF-8                  
+            nuevo_documento = Document(title=title, file=doc)
+            nuevo_documento.save_with_coordinates()
 
-        nuevo_documento = Document(title=title, file=doc)
-        nuevo_documento.save_with_coordinates()
 
-        return redirect('listar_documentos')
+            return redirect('listar_documentos')
+        except Exception as e:
+            logging.error(f'Error importing document: {e}')
+            return render(request, 'map.html', {'nav':navigator.at_list(), 'error_message': e})
 
     return render(request, 'map.html', {'nav':navigator.at_list()})
 

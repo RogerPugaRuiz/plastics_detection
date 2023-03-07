@@ -120,7 +120,7 @@ class Element():
 
 
 class Navigator():
-    def __init__(self, elements:list[Element]=[]) -> None:
+    def __init__(self, elements:list=[]) -> None:
         self.elements = elements
 
     def add_element(self, element:Element):
@@ -130,7 +130,7 @@ class Navigator():
     def __str__(self) -> str:
         return self.elements
 
-    def at_list(self) -> list[Element]:
+    def at_list(self) -> list:
         return self.elements
     
     def remove_all_elemnets(self):
@@ -147,7 +147,7 @@ def create_navigator():
         Element(text_element='Exportar documento', id_element='exportar-documento-button'),
         Element(text_element='Documentos añadidos', id_element='documentos-añadidos-button', href_element="listar_documentos", add_separator=True),
         Element(text_element='Abrir documneto', id_element='agregar-documento-al-mapa-button'),
-        Element(text_element='Abrir documneto local', id_element='agregar-documento-local-al-mapa-button', add_separator=True),
+        Element(text_element='Cerrar documneto', id_element='cerrar-documento-button', add_separator=True),
         Element(text_element='Preferencias', id_element='preferencias')
     ]))
     navigator.add_element(Element(text_element='Ver',id_element='nav-ver', subelements=[

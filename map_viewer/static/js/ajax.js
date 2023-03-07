@@ -69,6 +69,8 @@ $(document).ready(function() {
     submit_button = $('#add-name-data')
     input = $('input[name="q"]');
     submit_button.on("click", function(){
-      console.log("click")
+      const name = input.val();
+      sessionStorage.setItem('file', name);
+      window.location.href = "http://127.0.0.1:8000/"
     })
   }

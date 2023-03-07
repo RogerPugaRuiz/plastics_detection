@@ -1,0 +1,18 @@
+{% if error_message %}
+    <div id="error">
+        <div class="box">
+            <p>{{ error_message }}</p>
+            <p>Por favor, si el problema persiste, contáctanos en <a href="mailto:soporte@ejemplo.com">soporte@ejemplo.com</a></p>
+            <div class="button-container">
+                <button type="submit" id="ok-error">Ok</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#ok-error').click(function () {
+                $('#error').toggle();
+            });
+        });
+    </script>
+{% endif %}

@@ -1,20 +1,22 @@
 
-// Obtener la URL actual
-var urlActual = window.location.href;
 
-// Crear un objeto URLSearchParams
-var searchParams = new URLSearchParams(new URL(urlActual).search);
 
-// Obtener el valor del parámetro 'q'
-var qParam = searchParams.get('q');
+// // Obtener la URL actual
+// var urlActual = window.location.href;
 
-// Decodificar el valor del parámetro 'q'
-var qValue = decodeURIComponent(qParam);
+// // Crear un objeto URLSearchParams
+// var searchParams = new URLSearchParams(new URL(urlActual).search);
 
-var element_file_name =  $('#ver-documento-cargado-button')
-element_file_name.text("Documento cargado: " + qValue)
-console.log(element_file_name.text())
+// // Obtener el valor del parámetro 'q'
+// var qParam = searchParams.get('q');
 
+// // Decodificar el valor del parámetro 'q'
+// var qValue = decodeURIComponent(qParam);
+
+// var element_file_name =  $('#ver-documento-cargado-button')
+// element_file_name.text("Documento cargado: " + qValue)
+// console.log(element_file_name.text())
+qValue = sessionStorage.getItem('file')
 searchByName(qValue)
 
 var dataReady = new Promise(function(resolve, reject) {
@@ -42,6 +44,7 @@ dataReady.then(function() {
   // map.remove()
   map_loader()
 
+
 });
 
 function searchByName(nombre) {
@@ -53,7 +56,7 @@ function searchByName(nombre) {
     dataType: "json",
     success: function(response) {
       data = response.data;
-      // console.log(data);
+
     },
     error: function(xhr, status, error) {
       console.log("Ha ocurrido un error:", error);
@@ -101,7 +104,8 @@ function map_loader(){
       playerOptions: {
         transitionTime: 1000,
         loop: true
-      }
+      },
+      
     },
     timeDimensionControl: true
     // layers: [mapLayer, timeDimensionLayer]
@@ -125,6 +129,12 @@ function map_loader(){
   heatmapLayer.addTo(new_map)
   mapLayer.addTo(new_map)
   
+  // initialize data
+  console.log()
+  var tiempoActual = new_map.timeDimension.getCurrentTime();
+  var fechaActual = new Date(tiempoActual);
+  var tiempoActualStr = fechaActual.toISOString().slice(0, -5);
+  mostrarDatosActuales(tiempoActualStr);
   
   new_map.timeDimension.on("timeloading", function(timer){
     // setIntervalTimeDimensionControler()
@@ -137,7 +147,16 @@ function map_loader(){
     }
     var tiempoActualStr = tiempoActual.toISOString().slice(0, -5);
     mostrarDatosActuales(tiempoActualStr)
+
+    // var timeDimension = timer.timeDimension;
+    // if (!timeDimension.currentLoadedTime || timeDimension.player.isPlaying()) {
+    //   return;
+    // }
+    // if (!timeDimension.hasTime(timeDimension.currentLoadedTime)) {
+    //   timeDimension.setCurrentTime(data.time);
+    // }
   })
+
   
   
   // Mostrar los datos actuales

@@ -4,6 +4,13 @@
         <div id="search-form" class="form-box">
             <input type="text" name="q" placeholder="Buscar documento..." autocomplete="off">
             <div id="resultado-busqueda-por-nombre"></div>
+            <div id="archivo-cargado">
+                <!-- Si no hay un archivo cargado -->
+                <p class="negativo">No se ha cargado ningún archivo.</p>
+                
+                <!-- Si hay un archivo cargado -->
+                <p class="positivo">El archivo cargado es: <strong id="nombre-archivo"></strong></p>
+            </div>
             <div class="button-container">
                 <button type="submit" id="add-name-data">Agregar</button>
                 <button type="button" id="closeButton">Cancelar</button>

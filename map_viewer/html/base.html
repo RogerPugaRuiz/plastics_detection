@@ -55,6 +55,10 @@
 
     {% include 'forms/agregar_documento_local_al_mapa.html' %}
 
+    {% include 'forms/cerrar_documento.html' %}
+
+    {% include 'error.html' %}
+
 
     <main>
         {% block content %} {% endblock %}
@@ -70,6 +74,7 @@
     <script src="{% static 'js/popup-open.js' %}"></script>
     <script src="{% static 'js/ajax.js' %}"></script>
     <script src="{% static 'js/local.js' %}"></script>
+    <script src="{% static 'js/cerrar_documento.js' %}"></script>
 </body>
 
 </html>
