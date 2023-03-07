@@ -22,7 +22,7 @@ def import_document(request):
     if request.method == 'POST':
         try:
             doc = request.FILES['document']
-            title = doc.name.encode('utf-8')  # Codificar el título con UTF-8                  
+            title = doc.name              
             nuevo_documento = Document(title=title, file=doc)
             nuevo_documento.save_with_coordinates()
 
